@@ -38,7 +38,10 @@
 		"docs": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn compodoc -p src/tsconfig.app.json -d docs",
 		"docs:serve": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn compodoc -p src/tsconfig.app.json -d docs -s",
 		"ionic:build:prod": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn run config:prod && yarn ionic build --prod --release",
-		"cordova:build": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn ionic cordova build android",
+		"cordova:build:dev": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn ionic cordova build android",
+		"cordova:run:dev": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn ionic cordova run android",
+		"cordova:run:dev:device": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn ionic cordova run android",
+		"cordova:run:dev:device2": "cross-env NODE_ENV=development NODE_OPTIONS=--max_old_space_size=4096 yarn run config:dev && yarn ionic cordova run android --device",
 		"cordova:build:prod": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn run config:prod && yarn ionic cordova build android --prod --release",
 		"cordova:run:prod": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn run config:prod && yarn ionic cordova run android --prod --release",
 		"cordova:run:prod:device": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 yarn run config:prod && yarn ionic cordova run android --prod --release --device"
@@ -189,7 +192,8 @@
 			},
 			"cordova-plugin-ionic-keyboard": {},
 			"cordova-plugin-geolocation": {
-				"GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+				"GEOLOCATION_USAGE_DESCRIPTION": "To locate you",
+				"GPS_REQUIRED": "true"
 			},
 			"cordova-plugin-uniquedeviceid": {},
 			"cordova-plugin-intercom": {},

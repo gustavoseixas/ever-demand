@@ -615,9 +615,32 @@ export class ServicesApp {
 
 	private async _startSocketIO() {
 		const so: any = socketIO;
-		const ioHttps = so(this.httpsServer);
-		const ioHttp = so(this.httpServer);
-
+		const ioHttps = so(this.httpsServer, {
+			cors: {
+			  origin: "*",
+			  methods: ["GET", "POST"],
+			  allowedHeaders: [
+				"Access-Control-Allow-Origin",
+				"Access-Control-Allow-Methods",
+				"Access-Control-Allow-Credentials",
+				"*"
+			  ],
+			  credentials: true
+			}
+		  });
+		const ioHttp = so(this.httpServer, {
+			cors: {
+			  origin: "*",
+			  methods: ["GET", "POST"],
+			  allowedHeaders: [
+				"Access-Control-Allow-Origin",
+				"Access-Control-Allow-Methods",
+				"Access-Control-Allow-Credentials",
+				"*"
+			  ],
+			  credentials: true
+			}
+		  });
 		await this.routersManager.startListening(ioHttps);
 		await this.routersManager.startListening(ioHttp);
 	}

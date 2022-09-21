@@ -93,7 +93,7 @@ export class GeoLocationService {
 
 	private getLocationByIP(): Observable<Coords | null> {
 		return this.http.get(
-			environment.SERVICES_ENDPOINT + '/getLocationByIP',
+			environment.HTTPS_SERVICES_ENDPOINT + '/getLocationByIP',
 			{ headers: this.headers }
 		);
 	}

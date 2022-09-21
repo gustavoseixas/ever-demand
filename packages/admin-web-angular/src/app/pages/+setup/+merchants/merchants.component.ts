@@ -70,7 +70,7 @@ export class SetupMerchantsComponent {
 		} catch (error) {
 			this.toasterService.pop({
 				type: 'error',
-				title: `Error in creating warehouse: "${error.message}"`,
+				title: `Error in creating warehouse2: "${error.message}"`,
 				timeout: 0,
 			});
 		}

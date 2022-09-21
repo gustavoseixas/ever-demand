@@ -53,7 +53,7 @@ import { CallPageModule } from './pages/+products/+order/+call/call.module';
             },
         }),
         CommonModule.forRoot({
-            apiUrl: environment.SERVICES_ENDPOINT,
+            apiUrl: environment.HTTPS_SERVICES_ENDPOINT,
         }),
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
@@ -180,7 +180,7 @@ export function serverSettingsFactory(
 ) {
 	return async () => {
 		await serverConnectionService.load(
-			environment.SERVICES_ENDPOINT,
+			environment.HTTPS_SERVICES_ENDPOINT,
 			store
 		);
 		await serverSettings.load();
@@ -208,5 +208,5 @@ export function serverConnectionFactory(
 	provider: ServerConnectionService,
 	store: Store
 ) {
-	return () => provider.load(environment.SERVICES_ENDPOINT, store);
+	return () => provider.load(environment.HTTPS_SERVICES_ENDPOINT, store);
 }

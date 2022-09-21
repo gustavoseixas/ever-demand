@@ -118,7 +118,7 @@ export class WarehouseMutationComponent implements AfterViewInit {
 			this.loading = false;
 			this.toasterService.pop(
 				'error',
-				`Error in creating warehouse: "${err.message}"`
+				`Error in creating warehouse1: "${err.message}"`
 			);
 		}
 	}

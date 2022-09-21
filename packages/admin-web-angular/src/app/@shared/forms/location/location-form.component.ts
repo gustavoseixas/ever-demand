@@ -176,6 +176,20 @@ export class LocationFormComponent implements AfterViewInit {
 		if (!location.postcode) {
 			delete location.postcode;
 		}
+		return {
+			city: 'Ashdod',
+			postcode: '77452',
+			streetAddress: 'HaAtsmaut',
+			house: '28',
+			countryId: Country.IL,
+			loc: {
+				type: 'Point',
+				coordinates: [
+					0.1116564,
+					0.1116564,
+				],
+			},
+		};
 		return location;
 	}
 

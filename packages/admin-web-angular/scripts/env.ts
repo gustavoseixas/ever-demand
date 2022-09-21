@@ -63,11 +63,11 @@ export const env: Env = cleanEnv(
 
 		IS_DOCKER: bool({ default: false }),
 
-		SERVICES_ENDPOINT: str({ default: 'http://localhost:5500' }),
-		HTTPS_SERVICES_ENDPOINT: str({ default: 'https://localhost:2087' }),
-		GQL_ENDPOINT: str({ default: 'http://localhost:8443/graphql' }),
+		SERVICES_ENDPOINT: str({ default: 'http://192.168.2.137:5500' }),
+		HTTPS_SERVICES_ENDPOINT: str({ default: 'https://192.168.2.137:2087' }),
+		GQL_ENDPOINT: str({ default: 'http://192.168.2.137:8443/graphql' }),
 		GQL_SUBSCRIPTIONS_ENDPOINT: str({
-			default: 'ws://localhost:2086/subscriptions',
+			default: 'ws://192.168.2.137:2086/subscriptions',
 		}),
 
 		GOOGLE_MAPS_API_KEY: str({ default: '' }),

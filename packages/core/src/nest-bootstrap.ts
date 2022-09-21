@@ -51,7 +51,7 @@ export async function bootstrapNest(): Promise<void> {
 		})
 	);
 
-	app.use(helmet());
+	app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }));
 	const globalPrefix = 'api';
 	app.setGlobalPrefix(globalPrefix);
 
