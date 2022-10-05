@@ -91,7 +91,7 @@ export const env: Env = cleanEnv(
 		WEB_CONCURRENCY: num({ default: 1 }),
 		WEB_MEMORY: num({ default: 2048 }),
 
-		API_HOST: str({ default: '192.168.2.137'}),
+		API_HOST: str({ default: '127.0.0.1'}),
 		HTTPSPORT: port({ default: 2087 }),
 		HTTPPORT: port({ default: 5500 }),
 		GQLPORT: port({ default: 8443 }),

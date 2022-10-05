@@ -54,7 +54,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 				deps: [HttpClient],
 			},
 		}),
-		CommonModule.forRoot({ apiUrl: environment.HTTPS_SERVICES_ENDPOINT }),
+		CommonModule.forRoot({ apiUrl: environment.SERVICES_ENDPOINT }),
 		NgbModule,
 		NbEvaIconsModule,
 		ThemeModule.forRoot(),
@@ -187,7 +187,7 @@ export function serverConnectionFactory(
 	provider: ServerConnectionService,
 	store: Store
 ) {
-	return () => provider.load(environment.HTTPS_SERVICES_ENDPOINT, store);
+	return () => provider.load(environment.SERVICES_ENDPOINT, store);
 }
 
 export function maintenanceFactory(provider: MaintenanceService) {

@@ -1,3 +1,4 @@
+import fs from 'fs';
 import chalk from 'chalk';
 import { urlencoded, json } from 'express';
 import { NestFactory, Reflector } from '@nestjs/core';
@@ -18,8 +19,15 @@ declare const module: any;
 
 export async function bootstrapNest(): Promise<void> {
 
+
+	const httpsOptions = {
+		key: fs.readFileSync('certificates/https/key.pem'),
+		cert: fs.readFileSync('certificates/https/cert.pem'),
+	  };
+
 	const app: INestApplication = await NestFactory.create(ApplicationModule, {
 		logger: new EverbieNestJSLogger(),
+		//httpsOptions
 	});
 
 	// This will lock all routes and make them accessible by authenticated users only.
@@ -51,7 +59,14 @@ export async function bootstrapNest(): Promise<void> {
 		})
 	);
 
-	app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }));
+	const devContentSecurityPolicy = {
+		directives: {
+			scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+			imgSrc: ["'self'", 'data:', 'https://cdn.jsdelivr.net'],
+		},
+	};
+
+	app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? false  : false }));
 	const globalPrefix = 'api';
 	app.setGlobalPrefix(globalPrefix);
 

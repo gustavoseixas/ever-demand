@@ -126,7 +126,7 @@ export class ServicesApp {
 		const isSSL = process.env.DB_SSL_MODE && process.env.DB_SSL_MODE !== 'false';
 
 		// let's temporary save Cert in ./tmp/logs folder because we have write access to it
-		let sslCertPath = `${env.LOGS_PATH}/ca-certificate.crt`;
+		let sslCertPath = `${env.LOGS_PATH}/lab.local-signed-plus-key.pem`;
 
 		console.log(`Using temp SSL Cert Path: ${sslCertPath}`);
 
@@ -628,7 +628,7 @@ export class ServicesApp {
 			  credentials: true
 			}
 		  });
-		const ioHttp = so(this.httpServer, {
+		 const ioHttp = so(this.httpServer, {
 			cors: {
 			  origin: "*",
 			  methods: ["GET", "POST"],
