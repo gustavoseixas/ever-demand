@@ -67,7 +67,7 @@ ARG UNLEASH_METRICS_INTERVAL
 FROM node:16-alpine3.14 AS dependencies
 
 LABEL maintainer="ever@ever.co"
-LABEL org.opencontainers.image.source https://github.com/ever-co/ever-demand
+#LABEL org.opencontainers.image.source https://git hub.com/gustavoseixas/ever-demand
 
 ENV CI=true
 
@@ -94,17 +94,20 @@ COPY --chown=node:node packages/common/package.json ./packages/common/package.js
 COPY --chown=node:node .snyk ./.snyk
 COPY --chown=node:node packages/core/.snyk ./packages/core/.snyk
 
+#RUN yarn bootstrap && yarn cache clean
+
+#FROM node:16-alpine3.14 AS development
+
+#USER node:node
+
+#WORKDIR /srv/ever
+
+#COPY --chown=node:node --from=dependencies /wait /entrypoint.compose.sh /entrypoint.prod.sh /
+#COPY --chown=node:node --from=dependencies /srv/ever .
+COPY --chown=node:node  . .
+RUN rm -rf ./node_modules
+
 RUN yarn bootstrap && yarn cache clean
-
-FROM node:16-alpine3.14 AS development
-
-USER node:node
-
-WORKDIR /srv/ever
-
-COPY --chown=node:node --from=dependencies /wait /entrypoint.compose.sh /entrypoint.prod.sh /
-COPY --chown=node:node --from=dependencies /srv/ever .
-COPY . .
 
 FROM node:16-alpine3.14 AS build
 
@@ -112,7 +115,7 @@ WORKDIR /srv/ever
 
 RUN mkdir dist
 
-COPY --chown=node:node --from=development /srv/ever .
+COPY --chown=node:node --from=dependencies /srv/ever .
 
 ENV NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=2048"}
 ENV NODE_ENV=${NODE_ENV:-production}
