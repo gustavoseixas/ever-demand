@@ -111,6 +111,8 @@ services:
             args:
                 NODE_ENV: ${NODE_ENV:-development}
         environment:
+            ADMIN_PASSWORD_RESET: true
+            FAKE_DATA_GENERATOR: true
             NODE_ENV: ${NODE_ENV:-development}
             WAIT_HOSTS: db:27017
             DB_HOST: db
@@ -119,10 +121,12 @@ services:
         env_file:
             - .env
         entrypoint: './entrypoint.compose.sh'
-        command: ['node', 'packages/core/build/src/main.js']
-        restart: on-failure
-        depends_on:
-            - db
+        command: ['node', 'packages/core/build/main.js']
+#        command: ['ls', '-la']
+
+#        restart: on-failure
+#        depends_on:
+#            - db
         links:
             - db
         # volumes:

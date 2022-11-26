@@ -159,7 +159,10 @@ const connectionSettings: TypeOrmModuleOptions = {
 			context: ({ req, res }) => ({
 				req,
 			}),
-
+			cors: {
+				origin: true,
+				credentials: true,
+			  },
 		}),
 		InvitesModule,
 		DevicesModule,
@@ -252,7 +255,7 @@ export class ApplicationModule implements NestModule, OnModuleInit {
 			}),
 			plugins: [
 				ApolloServerPluginLandingPageGraphQLPlayground(playgroundOptions)
-			]
+			],
 		});
 	}
 

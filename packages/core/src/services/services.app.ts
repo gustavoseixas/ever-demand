@@ -128,7 +128,8 @@ export class ServicesApp {
 		// let's temporary save Cert in ./tmp/logs folder because we have write access to it
 		let sslCertPath = `${env.LOGS_PATH}/lab.local-signed-plus-key.pem`;
 
-		console.log(`Using temp SSL Cert Path: ${sslCertPath}`);
+		console.log(`Using temp SSL Cert Path..: ${sslCertPath}`);
+		console.log('isSSL:'+isSSL);
 
         if (isSSL) {
 			const base64data = process.env.DB_CA_CERT;
@@ -165,6 +166,8 @@ export class ServicesApp {
 				logger: 'file', // Removes console logging, instead logs all queries in a file ormlogs.log
 				useUnifiedTopology: true,
 			};
+
+		console.log('connectionSettings'+JSON.stringify(connectionSettings, null, 1))
 
 		const conn = await createConnection(connectionSettings);
 
@@ -204,7 +207,8 @@ export class ServicesApp {
 			// let's temporary save Cert in ./tmp/logs folder because we have write access to it
 			let sslCertPath = `${env.LOGS_PATH}/ca-certificate.crt`;
 
-			console.log(`Using temp SSL Cert Path: ${sslCertPath}`);
+			console.log(`Using temp SSL Cert Path->: ${sslCertPath}`);
+			console.log('isSSL::'+isSSL);
 
         	if (isSSL) {
 				const base64data = process.env.DB_CA_CERT;
@@ -222,6 +226,7 @@ export class ServicesApp {
 				connectTimeoutMS: ServicesApp._connectTimeoutMS,
 				appName: 'ever_demand'
 			};
+			console.log('connectionOptions:::'+JSON.stringify(connectionOptions, null, 1));
 
 			const mongoConnect: mongoose.Mongoose = await mongoose.connect(
 				env.DB_URI,

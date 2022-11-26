@@ -67,7 +67,9 @@ if (!env.IS_DOCKER) {
 
 			// For maintenance micro service. Ever maintenance API URL: https://maintenance.ever.co/status
 			SETTINGS_APP_TYPE: '${env.SETTINGS_APP_TYPE}',
-			SETTINGS_MAINTENANCE_API_URL: '${env.SETTINGS_MAINTENANCE_API_URL}'
+			SETTINGS_MAINTENANCE_API_URL: '${env.SETTINGS_MAINTENANCE_API_URL}',
+			NODE_OPTIONS: '${env.NODE_OPTIONS}',
+			WEB_MEMORY: '${env.WEB_MEMORY}'
 		};
 `;
 } else {

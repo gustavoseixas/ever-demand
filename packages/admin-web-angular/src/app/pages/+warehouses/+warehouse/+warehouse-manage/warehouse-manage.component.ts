@@ -8,6 +8,8 @@ import { LocationFormComponent } from '../../../../@shared/forms/location';
 import { WarehouseRouter } from '@modules/client.common.angular2/routers/warehouse-router.service';
 import Warehouse from '@modules/server.common/entities/Warehouse';
 import { WarehouseManageTabsComponent } from '../../../../@shared/warehouse/forms/warehouse-manage-tabs/warehouse-manage-tabs.component';
+import { environment } from 'environments/environment';
+
 
 @Component({
 	selector: 'ea-warehouse-manage',
@@ -67,7 +69,17 @@ export class WarehouseManageComponent implements OnInit {
 		try {
 			this.loading = true;
 			const tabsInfoRaw = this.warehouseManageTabs.getValue();
+			try{
+				console.log('-1-111111111111111111111111111111111111111111111111111111111111111111111111111111111')
 
+				console.log('WEB_MEMORY: '+environment.WEB_MEMORY);
+				console.log('environment..NODE_OPTIONS: '+environment.NODE_OPTIONS);
+				//console.log('environment..VSCODE_INSPECTOR_OPTIONS: '+ environment.VSCODE_INSPECTOR_OPTIONS);
+				console.log('-2-111111111111111111111111111111111111111111111111111111111111111111111111111111111')
+			}
+			catch(e){
+				console.error('errooooooooooooooooooooooo');
+			}
 			const warehouseRaw = {
 				...this._currentWarehouse,
 				...tabsInfoRaw.basicInfo,

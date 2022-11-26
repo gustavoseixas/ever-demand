@@ -1,21 +1,45 @@
 {
-	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Attach",
-			"port": 9229,
+			"name": "Attach to Edge",
+			"port": 9222,
 			"request": "attach",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"type": "node"
+			"type": "msedge",
+			"sourceMaps": true,
+			"trace": true,
+			"urlFilter": "http://localhost:4200/*",
+			"webRoot": "${workspaceFolder}/packages/admin-web-angular/",
+			/* "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/webpack:/src/*"
+			} */
 		},
-	{
-		"name": "CORE Attach to Chrome",
-		"port": 9222,
-		"request": "attach",
-		"type": "chrome",
-		"webRoot": "${workspaceFolder}/packages/core"
-	}
+		{
+			"name": "Attach to Chrome",
+			"port": 9222,
+			"request": "attach",
+			"sourceMaps": true,
+			"type": "chrome",
+			"trace": true,
+			"urlFilter": "http://localhost:4200/*",
+			"webRoot": "${workspaceFolder}/packages/admin-web-angular",
+			/*"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceRoot}/*",
+                "webpack:///.src/*": "${webRoot}/src/*",
+				 "webpack:///./src/*": "${webRoot}/.src/*",
+				"webpack:///src/*": "${webRoot}/.src/*"
+			}*/
+		},
+		{
+			"name": "Attach to Chrome 2",
+			"port": 9222,
+			"request": "attach",
+			"type": "chrome",
+			"url": "http://localhost:4200",
+			"webRoot": "${workspaceFolder}",
+			"sourceMapPathOverrides": {
+				"webpack:///./packages/admin-web-angular/src/*": "${webRoot}/*",
+				"webpack:///packages/admin-web-angular/src/*": "${webRoot}/*"
+			}
+		},
 	]
 }

@@ -51,6 +51,10 @@
 		<google-map
 			[mapCoordEvent]="mapCoordEmitter"
 			[mapGeometryEvent]="mapGeometryEmitter"
+			[mapCenterImagePinEnhance]="false"
+			(mapCenterCoordinatesEmitter)="onCenterCoordinatesChanges($event)"
+			[mapMarkerDraggable]="true"
+			(mapMarkerCoordinatesEmitter)="onMapMarkerCoordinatesChanges($event)"
 		>
 		</google-map>
 	</nb-tab>

@@ -8,7 +8,7 @@ import { environment } from 'environments/environment';
 		AgmCoreModule.forRoot({
 			apiKey: environment.GOOGLE_MAPS_API_KEY,
 			libraries: ['drawing'],
-		}),
+		})
 	],
 	declarations: [GoogleMapComponent],
 	exports: [GoogleMapComponent],

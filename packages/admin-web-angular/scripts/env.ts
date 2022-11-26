@@ -49,7 +49,9 @@ export type Env = Readonly<{
 	DEFAULT_LANGUAGE: string;
 
 	WEB_CONCURRENCY: number;
+
 	WEB_MEMORY: number;
+	NODE_OPTIONS: string;
 	PORT: number;
 }>;
 
@@ -121,6 +123,7 @@ export const env: Env = cleanEnv(
 
 		WEB_CONCURRENCY: num({ default: 1 }),
 		WEB_MEMORY: num({ default: 2048 }),
+		NODE_OPTIONS: str(),
 		PORT: num({ default: 4200 }),
 	}, opt
 );

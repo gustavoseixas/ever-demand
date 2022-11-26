@@ -96,6 +96,16 @@ export class WarehouseManageTabsComponent {
 		this.mapCoordEmitter.emit(coords);
 	}
 
+	onCenterCoordinatesChanges(coords: any) {
+		console.log('onCenterCoordinatesChanges:::'+coords);
+		this.locationForm.coordinates.setValue([coords.lat(), coords.lng()]);
+	}
+
+	onMapMarkerCoordinatesChanges(coords: any) {
+		console.log('onMapMarkerCoordinatesChanges:::'+coords);
+		this.locationForm.coordinates.setValue([coords.lat(), coords.lng()]);
+	}
+
 	onGeometrySend(geometry: any) {
 		this.mapGeometryEmitter.emit(geometry);
 	}

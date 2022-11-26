@@ -80,7 +80,7 @@
 							],
 							"optimization": true,
 							"outputHashing": "all",
-							"sourceMap": false,
+							"sourceMap": true,
 							"namedChunks": false,
 							"aot": true,
 							"extractLicenses": true,
@@ -92,17 +92,36 @@
 									"with": "src/environments/environment.prod.ts"
 								}
 							]
+						},
+						"development": {
+							"budgets": [
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb"
+								}
+							],
+							"optimization": false,
+							"sourceMap": true,
+							"namedChunks": true,
+							"aot": false,
+							"extractLicenses": false,
+							"vendorChunk": true,
+							"buildOptimizer": false
 						}
 					}
 				},
 				"serve": {
+					"defaultConfiguration": "development",
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "ever-admin:build"
+						"browserTarget": "ever-admin:build:development"
 					},
 					"configurations": {
 						"production": {
 							"browserTarget": "ever-admin:build:production"
+						},
+						"development": {
+							"browserTarget": "ever-admin:build:development"
 						}
 					}
 				},
