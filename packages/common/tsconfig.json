@@ -4,6 +4,9 @@
 		"baseUrl": "./src",
 		"outDir": "./build",
 		"rootDir": "./src",
+		"target": "es5",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
 		"types": ["node", "reflect-metadata", "jest"],
 		"paths": {
 			"@pyro/*": ["@pyro/*", "/@pyro/*"]
