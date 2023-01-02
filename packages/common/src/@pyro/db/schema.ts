@@ -87,5 +87,9 @@ export function getSchema(DBObj: DBObjectClass): MongooseSchema {
 		}
 	});
 
+	console.log('MopdelName: '+DBObj.modelName);
+	// (schema as MongooseSchema).eachPath(function(path) {
+	// 	console.log('---'+path);
+	// });
 	return schema;
 }

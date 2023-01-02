@@ -13,6 +13,7 @@ import { CreateObject } from '@pyro/db/db-create-object';
 import { FindObject } from '@pyro/db/db-find-object';
 import { UpdateObject } from '@pyro/db/db-update-object';
 import { EntityService } from '@pyro/db-server/entity-service';
+import { env } from './../../env';
 
 @injectable()
 export abstract class DBService<T extends DBObject<any, any>>
@@ -30,6 +31,13 @@ export abstract class DBService<T extends DBObject<any, any>>
 	constructor() {
 		super();
 		this.existence = new Subject<ExistenceEvent<T>>();
+		if (env.LOG_QUERIES){
+			mongoose.set("debug", true);
+			// mongoose.set("debug", (collectionName, method, query, doc, options) => {
+			// 	console.log('-------------------------------------------------------------------------------------------------------------------:\n '
+			// 	+`db.${collectionName}.${method}`, '(\n'+JSON.stringify(query, null, 3),',\n'+JSON.stringify(doc, null, 3)+',\n'+JSON.stringify(options, null, 3)+'\n)');
+			// });
+		}
 	}
 
 	get(id: T['id']): Observable<T | null> {
@@ -429,13 +437,17 @@ export abstract class DBService<T extends DBObject<any, any>>
 
 		let lastValues: T[];
 		let updatedObjects: T[];
+		//mongoose.set('debug', true);
+
 
 		try {
 			lastValues = await this.find(findObj);
 
-			await this.Model.updateMany(findObj, updateObj, {
-				new: true,
-			}).exec();
+			let query: any = await this.Model.updateMany(findObj, updateObj, {
+				new: true, typeKey: '$type'
+			});
+
+			query.exec();
 
 			updatedObjects = await this.getCurrentMultiple(
 				_.map(lastValues, (value) => value.id)

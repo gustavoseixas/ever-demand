@@ -71,15 +71,16 @@ LABEL org.opencontainers.image.source https://github.com/ever-co/ever-demand
 
 ENV CI=true
 
-RUN apk --update add bash \
-	&& apk add libexecinfo libexecinfo-dev \
-	&& npm i -g npm \
-	&& apk add --no-cache --virtual build-dependencies build-base \
-	snappy dos2unix g++ snappy-dev gcc libgcc libstdc++ linux-headers autoconf automake make nasm python2 py2-setuptools vips-dev git \
-	&& npm install --quiet node-gyp -g \
-	&& npm config set python /usr/bin/python \
-	&& npm install yarn -g --force \
-	&& mkdir /srv/ever && chown -R node:node /srv/ever
+RUN apk --update add bash
+RUN apk add libexecinfo libexecinfo-dev
+RUN npm i -g npm
+RUN apk add --no-cache --virtual build-dependencies build-base \
+	snappy dos2unix g++ snappy-dev gcc libgcc libstdc++ linux-headers autoconf automake make nasm python2 py2-setuptools vips-dev git
+RUN npm install --quiet node-gyp -g
+#RUN npm -v
+#RUN npm config set python /usr/bin/python
+RUN npm install yarn -g --force
+RUN mkdir /srv/ever && chown -R node:node /srv/ever
 
 COPY wait .deploy/api/entrypoint.compose.sh .deploy/api/entrypoint.prod.sh /
 RUN chmod +x /wait /entrypoint.compose.sh /entrypoint.prod.sh && dos2unix /entrypoint.compose.sh && dos2unix /entrypoint.prod.sh
@@ -130,6 +131,7 @@ COPY --chown=node:node --from=dependencies /wait /entrypoint.prod.sh /entrypoint
 COPY --chown=node:node --from=dependencies /srv/ever/node_modules ./node_modules
 COPY --chown=node:node --from=build /srv/ever/packages/common/ ./packages/common/
 COPY --chown=node:node --from=build /srv/ever/packages/core/ ./packages/core/
+COPY --chown=node:node --from=build /srv/ever/packages/core/certificates ./certificates
 
 RUN chmod +x wait entrypoint.compose.sh entrypoint.prod.sh
 
@@ -217,7 +219,7 @@ ENV UNLEASH_METRICS_INTERVAL=${UNLEASH_METRICS_INTERVAL}
 
 EXPOSE ${HTTPPORT} ${HTTPSPORT} ${GQLPORT} ${GQLPORT_SUBSCRIPTIONS}
 
-#ENTRYPOINT [ "./entrypoint.prod.sh" ]
+ENTRYPOINT [ "./entrypoint.prod.sh" ]
 
 #CMD [ "pm2-runtime", "packages/core/build/main.js" ]
 #CMD [ "node", "packages/core/build/main.js" ]

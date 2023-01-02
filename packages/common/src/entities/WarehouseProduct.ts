@@ -77,11 +77,11 @@ class WarehouseProduct
 	/**
 	 * Ref to Product
 	 *
-	 * @type {(Product)}
+	 * @type {(Product | string)}
 	 * @memberof WarehouseProduct
 	 */
 	@Types.Ref(Product)
-	product: Product;
+	product: Product | string;
 
 	/**
 	 * Is product(s) require manufacturing

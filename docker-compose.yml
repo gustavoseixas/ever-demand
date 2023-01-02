@@ -111,6 +111,7 @@ services:
             args:
                 NODE_ENV: ${NODE_ENV:-development}
         environment:
+            API_HOST: 0.0.0.0
             ADMIN_PASSWORD_RESET: true
             FAKE_DATA_GENERATOR: true
             NODE_ENV: ${NODE_ENV:-development}
@@ -118,6 +119,7 @@ services:
             DB_HOST: db
             DB_URI: mongodb://db/ever_development
             TESTING_DB_URI: mongodb://db/ever_testing
+            DB_SSL_MODE: false
         env_file:
             - .env
         entrypoint: './entrypoint.compose.sh'

@@ -67,6 +67,7 @@ export type Env = Readonly<{
 	IP_STACK_API_KEY?: string;
 
 	LOG_LEVEL?: string;
+	LOG_QUERIES?: boolean;
 
 	ENGINE_API_KEY?: string;
 
@@ -169,6 +170,7 @@ export const env: Env = cleanEnv(
 			choices: ['trace', 'debug', 'info', 'warn', 'error', 'fatal'],
 			default: 'error',
 		}),
+		LOG_QUERIES: bool({ default: false }),
 
 		ENGINE_API_KEY: str({
 			desc:
